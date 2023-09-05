@@ -26,8 +26,8 @@ export default {
     border: '2px solid #4262ff60',
     borderRadius: 5,
     fontSize: 18,
-    backgroundColor: '#fff',
     fontWeight: 'bold',
+    boxSizing: 'border-box'
   },
   check: {
     marginBottom: 10,

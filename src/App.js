@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import Form from "./comps/Form";
 import Select from "./comps/Select";
 import ScrollDrag from "./ScrollDrag";
-
 import "./App.css";
 import MultiSwitch from "./comps/MultiSwitch";
 
