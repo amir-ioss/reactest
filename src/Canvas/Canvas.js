@@ -6,24 +6,32 @@ import { drawLine, drawRect } from "./help";
 import { nextLineEndpoint, calculatePercentage } from "./help";
 import DoubleTop from './Pattern/DoubleTop'
 import RisingWedge from './Pattern/RisingWedge'
+import BullishRectangle from './Pattern/BullishRectangle'
+import BearighPennant from './Pattern/BearighPennant'
 
-var lineWidth = 100;
-var data_boost = 10
+var lineWidth = 30;
+var data_boost = 5
 const cval = (_) => window.innerHeight - _ * data_boost;
 
 // https://www.babypips.com/learn/forex/how-to-trade-chart-patterns
 
-
 const Draw = (ctx) => {
   var cdata = test_data.map((_) => cval(_));
   // const hasPattern = DoubleTop(ctx, test_data);
-  const hasPattern = RisingWedge(ctx, test_data);
+  // const doubleTop = DoubleTop(ctx, test_data);
+  // const risingWedge = RisingWedge(ctx, test_data);
+  // const bullishRectangle = BullishRectangle(ctx, test_data);
+  const bearighPennant = BearighPennant(ctx, test_data);
+  // console.log("doubleTop", doubleTop);
+  // console.log("risingWedge", risingWedge);
+  // console.log("bullishRectangle", bullishRectangle);
+  console.log("bearighPennant", bearighPennant);
 
-  if (hasPattern) {
-    console.log("YEEEEEEEEEEEEES");
-  } else {
-    console.log("Nooooooooooooo");
-  }
+  // if (hasPattern) {
+  //   console.log("YEEEEEEEEEEEEES");
+  // } else {
+  //   console.log("Nooooooooooooo");
+  // }
 
   // draw
   cdata.forEach((val, idx) => {
@@ -32,7 +40,7 @@ const Draw = (ctx) => {
     let y1 = cdata[idx - 1];
     let x2 = idx * lineWidth + lineWidth;
     let y2 = cdata[idx];
-    return drawLine(ctx, x1, y1, x2, y2, "tomato", 1);
+    return drawLine(ctx, x1, y1, x2, y2, "blue", 1);
   });
 };
 

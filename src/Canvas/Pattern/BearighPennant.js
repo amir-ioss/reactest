@@ -6,7 +6,7 @@ const cval = (_) => window.innerHeight - _ * data_boost;
 
 // data [0, 15, 20, 70, 45, 80, 65, 85, 75, 90, 85]
 
-export default function RisingWedge(ctx, data_, minPivots = 6) {
+export default function BearighPennant(ctx, data_, minPivots = 6) {
     var data = [...data_].reverse();
     var len = data.length;
     var shapePivot = new Array(minPivots).fill(-1);
@@ -41,28 +41,30 @@ export default function RisingWedge(ctx, data_, minPivots = 6) {
     for (let i = 0; i < shapePivot.length; i++) {
       if(i<2)continue;
       if(i % 2 == 0){
-        if(data[i] > data[i+2] && data[i] < data[i-2]){
+        if(data[i] > data[i+2]){
             // console.log("OK BOTTOM");
             shapePivot[i] = 1;
+          }
+          else{
+            shapePivot[i] = -1;
+          }
         }
-          drawLine(ctx, ((len-i)-2)*lineWidth, cval(data[i]), ((len-i)+2)*lineWidth, cval(data[i]), "red", 1);
-      }else{
-        shapePivot[i] = -1;
-      }
+        drawLine(ctx, ((len-i)-2)*lineWidth, cval(data[i]), ((len-i)+2)*lineWidth, cval(data[i]), "red", 1);
+        
       if(i % 2 == 1){
-        if(data[i] > data[i+2] && data[i] < data[i-2]){
+        if(data[i] < data[i+2]){
             // console.log("OK TOP");
             shapePivot[i] = 1;
-        }else{
+          }else{
             shapePivot[i] = -1;
-        }
+          }
           drawLine(ctx, ((len-i)-2)*lineWidth, cval(data[i]), ((len-i)+2)*lineWidth, cval(data[i]), "green", 1);
       }
     }
   
   
     var gotShape_2 = !shapePivot.slice(2).some((_) => _ == -1)
-    // console.log("gotShape_2 =====>", shapePivot.slice(2));
+    console.log("gotShape_2 =====>", shapePivot.slice(2));
     if(!gotShape_2)return false
 
      // N E C K  L I N E
@@ -78,14 +80,29 @@ export default function RisingWedge(ctx, data_, minPivots = 6) {
       var resistY1 = cval(data[shapePivot.length-odd]) 
       var resistX2 = (len-1)*lineWidth
       var resistY2 = cval(data[1])
+
+      // Ratio compare
+      var rangeHeightStart = supportY1 - resistY1
+      var resistHeight = supportY1-resistY2  
+      var supportHeight = supportY1-supportY2
+      var resistPercent = (resistHeight*100/rangeHeightStart).toFixed(0)
+      var supportPercent = (supportHeight*100/rangeHeightStart).toFixed(0)
+      
+      // draw
+      ctx.font = "20px";
+      ctx.fillText(resistPercent+"%", resistX2,resistY2);
+      ctx.fillText(supportPercent+"%", supportX2,supportY2);
+ 
+      if(resistPercent < 60 && supportPercent > 20)return // shold match the ration
+
       
       drawLine(ctx, supportX1,supportY1,supportX2,supportY2);
       // support infinte
       var supportNext = nextLineEndpoint(supportX1,supportY1,supportX2,supportY2)
       drawLine(ctx, supportX2,supportY2, supportNext.x, supportNext.y, undefined, 1);
       
-      // resist infinte
       drawLine(ctx, resistX1,resistY1,resistX2,resistY2, cval(data[2]));
+      // resist infinte
       var resistNext = nextLineEndpoint(resistX1,resistY1,resistX2,resistY2)
       drawLine(ctx, resistX2,resistY2, resistNext.x, resistNext.y, undefined, 1);
   
