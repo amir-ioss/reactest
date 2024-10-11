@@ -8,9 +8,12 @@ import DoubleTop from './Pattern/DoubleTop'
 import RisingWedge from './Pattern/RisingWedge'
 import BullishRectangle from './Pattern/BullishRectangle'
 import BearighPennant from './Pattern/BearighPennant'
+import HeadShoulders from './Pattern/HeadShoulders'
+
+
 
 var lineWidth = 30;
-var data_boost = 5
+var data_boost = .00005
 const cval = (_) => window.innerHeight - _ * data_boost;
 
 // https://www.babypips.com/learn/forex/how-to-trade-chart-patterns
@@ -21,11 +24,14 @@ const Draw = (ctx) => {
   // const doubleTop = DoubleTop(ctx, test_data);
   // const risingWedge = RisingWedge(ctx, test_data);
   // const bullishRectangle = BullishRectangle(ctx, test_data);
-  const bearighPennant = BearighPennant(ctx, test_data);
+  // const bearighPennant = BearighPennant(ctx, test_data);
+  const headShoulders = HeadShoulders(ctx, test_data);
+
   // console.log("doubleTop", doubleTop);
   // console.log("risingWedge", risingWedge);
   // console.log("bullishRectangle", bullishRectangle);
-  console.log("bearighPennant", bearighPennant);
+  // console.log("bearighPennant", bearighPennant);
+  console.log("headShoulders", headShoulders);
 
   // if (hasPattern) {
   //   console.log("YEEEEEEEEEEEEES");

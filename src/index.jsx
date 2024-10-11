@@ -4,7 +4,13 @@ import "./index.css";
 // import App from './App';
 import TestUI from "./TestUI";
 import Canvas from "./Canvas/Canvas";
+import Pattern from "./Pattern";
+import Form from "./Form/Test";
 import reportWebVitals from "./reportWebVitals";
+// import { Input,Button } from "pkg_gpt";
+// import { Button } from "my-react-ui-ioss-test";
+// import { MyComponent } from 'react-pkg';
+
 
 const IFrame = () => {
   return (
@@ -19,8 +25,14 @@ const IFrame = () => {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Canvas />
+    {/* <TestUI /> */}
+    {/* <Button label="TEST BUTTON" onClick={() => null} /> */}
+    {/* <Input onChangeData={(data) => console.log(data)} /> */}
     {/* <IFrame/> */}
+    {/* <Button/> */}
+    {/* <MyComponent text={"THIS IS TEST"} /> */}
+    {/* <Canvas/> */}
+    <Form />
   </React.StrictMode>
 );
 
